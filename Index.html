@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkillExchange | Auth</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui}
+
+body{
+  background:#0e1020;
+  color:#fff;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.card{
+  width:100%;
+  max-width:380px;
+  background:#1d2148;
+  border-radius:18px;
+  padding:22px;
+}
+
+h2{text-align:center;margin-bottom:14px}
+
+.tabs{
+  display:flex;
+  background:#151832;
+  border-radius:14px;
+  overflow:hidden;
+  margin-bottom:16px;
+}
+.tabs button{
+  flex:1;
+  padding:12px;
+  background:none;
+  border:none;
+  color:#aaa;
+  font-weight:600;
+}
+.tabs .active{
+  background:#6c7cff;
+  color:#000;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:none;
+  margin-bottom:10px;
+  background:#151832;
+  color:#fff;
+}
+
+button.main{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:none;
+  background:#6c7cff;
+  color:#000;
+  font-weight:600;
+  margin-top:6px;
+}
+
+.msg{
+  text-align:center;
+  margin-top:10px;
+  font-size:14px;
+  color:#ff9a9a;
+  min-height:18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2 id="title">Login</h2>
+
+  <!-- TOGGLE -->
+  <div class="tabs">
+    <button id="loginTab" class="active" onclick="showLogin()">Login</button>
+    <button id="registerTab" onclick="showRegister()">Register</button>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="loginBox">
+    <input id="loginEmail" placeholder="Email">
+    <input id="loginPassword" type="password" placeholder="Password">
+    <button class="main" onclick="login()">Login</button>
+  </div>
+
+  <!-- REGISTER -->
+  <div id="registerBox" style="display:none">
+    <input id="regName" placeholder="Full Name">
+    <input id="regEmail" placeholder="Email">
+    <input id="regPassword" type="password" placeholder="Password">
+    <button class="main" onclick="register()">Create Account</button>
+  </div>
+
+  <div class="msg" id="msg"></div>
+</div>
+
+<!-- FIREBASE (REAL CONFIG) -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+/* ✅ YOUR REAL FIREBASE CONFIG */
+const firebaseConfig = {
+  apiKey: "AIzaSyBt5enDVu9T_WVP3iJw_eOBc9dKrLME_Xo",
+  authDomain: "skillexchange-706.firebaseapp.com",
+  projectId: "skillexchange-706",
+  storageBucket: "skillexchange-706.firebasestorage.app",
+  messagingSenderId: "853922656544",
+  appId: "1:853922656544:web:90a547a7a09a771b9ce745"
+};
+
+/* INIT */
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const msg = document.getElementById("msg");
+
+/* UI TOGGLE */
+window.showLogin = function(){
+  loginBox.style.display="block";
+  registerBox.style.display="none";
+  loginTab.classList.add("active");
+  registerTab.classList.remove("active");
+  title.innerText="Login";
+  msg.innerText="";
+};
+
+window.showRegister = function(){
+  loginBox.style.display="none";
+  registerBox.style.display="block";
+  registerTab.classList.add("active");
+  loginTab.classList.remove("active");
+  title.innerText="Register";
+  msg.innerText="";
+};
+
+/* LOGIN */
+window.login = function(){
+  msg.innerText="Logging in...";
+  signInWithEmailAndPassword(
+    auth,
+    loginEmail.value,
+    loginPassword.value
+  )
+  .then(()=>{
+    // redirect to main app
+    window.location.href = "index.html";
+  })
+  .catch(err=>{
+    msg.innerText = err.message;
+  });
+};
+
+/* REGISTER */
+window.register = function(){
+  msg.innerText="Creating account...";
+  createUserWithEmailAndPassword(
+    auth,
+    regEmail.value,
+    regPassword.value
+  )
+  .then(()=>{
+    window.location.href = "app.html";
+  })
+  .catch(err=>{
+    msg.innerText = err.message;
+  });
+};
+</script>
+
+</body>
+  </html>
