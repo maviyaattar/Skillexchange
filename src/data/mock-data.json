@@ -1,0 +1,27 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "User One",
+      "skills": ["Skill A", "Skill B"],
+      "experience": "5 years",
+      "reviews": "Great collaborator!"
+    },
+    {
+      "id": 2,
+      "name": "User Two",
+      "skills": ["Skill C", "Skill D"],
+      "experience": "2 years",
+      "reviews": "Very professional."
+    }
+  ],
+  "chats": [
+    {
+      "userId": 1,
+      "messages": [
+        {"from": "User One", "message": "Hi there!"},
+        {"from": "Me", "message": "Hello!"}
+      ]
+    }
+  ]
+}
