@@ -1,0 +1,1 @@
+/* Updated UI strings */ export const STRINGS = { welcomeMessage: "Welcome to SkillExchange", exchangePrompt: "Find someone to exchange skills and work with", noMatches: "No matches found. Adjust your preferences to find others.", matchFound: "Match Found! Connect to exchange your skills." };
