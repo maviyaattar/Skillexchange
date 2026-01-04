@@ -1,0 +1,54 @@
+<html>
+<head>
+<style>
+/* Add responsive styles */
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 10px;
+  }
+  .profile-header {
+    font-size: 1.5rem;
+  }
+}
+
+/* Skeleton loader styles */
+.skeleton-loader {
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #e0e0e0;
+  }
+  50% {
+    background-color: #f0f0f0;
+  }
+  100% {
+    background-color: #e0e0e0;
+  }
+}
+</style>
+</head>
+<body>
+  <div class="profile-container">
+    <div class="profile-header skeleton-loader">Profile Header</div>
+    <div class="profile-details skeleton-loader">Profile Details Loading...</div>
+  </div>
+
+<script>
+// Simulate loading delay for skeleton loaders
+setTimeout(() => {
+  const header = document.querySelector('.profile-header');
+  const details = document.querySelector('.profile-details');
+
+  header.classList.remove('skeleton-loader');
+  header.textContent = "Welcome, User!";
+
+  details.classList.remove('skeleton-loader');
+  details.textContent = "Here are your profile details.";
+}, 2000);
+</script>
+</body>
+</html>
