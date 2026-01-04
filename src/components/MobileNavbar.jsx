@@ -1,0 +1,1 @@
+// Code for bottom navigation for mobile
