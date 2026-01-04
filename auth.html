@@ -1,189 +1,502 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SkillExchange | Auth</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillExchange | Login & Register</title>
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui}
+    <style>
+        /* ==================== CSS VARIABLES ==================== */
+        :root {
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --dark-card-hover: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+        }
 
-body{
-  background:#0e1020;
-  color:#fff;
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+        /* ==================== GLOBAL STYLES ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.card{
-  width:100%;
-  max-width:380px;
-  background:#1d2148;
-  border-radius:18px;
-  padding:22px;
-}
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
 
-h2{text-align:center;margin-bottom:14px}
+        /* ==================== BACK BUTTON ==================== */
+        .back-link {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            z-index: 100;
+        }
 
-.tabs{
-  display:flex;
-  background:#151832;
-  border-radius:14px;
-  overflow:hidden;
-  margin-bottom:16px;
-}
-.tabs button{
-  flex:1;
-  padding:12px;
-  background:none;
-  border:none;
-  color:#aaa;
-  font-weight:600;
-}
-.tabs .active{
-  background:#6c7cff;
-  color:#000;
-}
+        .back-link:hover {
+            color: var(--primary-light);
+        }
 
-input{
-  width:100%;
-  padding:14px;
-  border-radius:14px;
-  border:none;
-  margin-bottom:10px;
-  background:#151832;
-  color:#fff;
-}
+        /* ==================== AUTH CARD ==================== */
+        .auth-container {
+            width: 100%;
+            max-width: 450px;
+            background: var(--dark-card);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-button.main{
-  width:100%;
-  padding:14px;
-  border-radius:14px;
-  border:none;
-  background:#6c7cff;
-  color:#000;
-  font-weight:600;
-  margin-top:6px;
-}
+        .logo {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
 
-.msg{
-  text-align:center;
-  margin-top:10px;
-  font-size:14px;
-  color:#ff9a9a;
-  min-height:18px;
-}
-</style>
+        .subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        /* ==================== TABS ==================== */
+        .tabs {
+            display: flex;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 16px;
+            padding: 0.4rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            background: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        /* ==================== FORM ELEMENTS ==================== */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.6);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* ==================== BUTTONS ==================== */
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        /* ==================== ADDITIONAL OPTIONS ==================== */
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .forgot-password {
+            color: var(--primary-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .forgot-password:hover {
+            color: var(--primary-color);
+        }
+
+        /* ==================== MESSAGE ==================== */
+        .message {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding: 0.75rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            min-height: 20px;
+            transition: all 0.3s;
+        }
+
+        .message.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .message.error {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error-color);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        /* ==================== HIDDEN ==================== */
+        .hidden {
+            display: none;
+        }
+
+        /* ==================== RESPONSIVE DESIGN ==================== */
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.75rem;
+            }
+
+            .back-link {
+                top: 1rem;
+                left: 1rem;
+            }
+        }
+
+        /* ==================== ANIMATIONS ==================== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-container {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
 </head>
-
 <body>
+    <!-- ==================== BACK TO HOME ==================== -->
+    <a href="home.html" class="back-link">
+        ← Back to Home
+    </a>
 
-<div class="card">
-  <h2 id="title">Login</h2>
+    <!-- ==================== AUTH CONTAINER ==================== -->
+    <div class="auth-container">
+        <div class="logo">SkillExchange</div>
+        <p class="subtitle">Your journey to skill mastery starts here</p>
 
-  <!-- TOGGLE -->
-  <div class="tabs">
-    <button id="loginTab" class="active" onclick="showLogin()">Login</button>
-    <button id="registerTab" onclick="showRegister()">Register</button>
-  </div>
+        <!-- ==================== TABS ==================== -->
+        <div class="tabs">
+            <button class="tab-button active" onclick="showLogin()">Login</button>
+            <button class="tab-button" onclick="showRegister()">Register</button>
+        </div>
 
-  <!-- LOGIN -->
-  <div id="loginBox">
-    <input id="loginEmail" placeholder="Email">
-    <input id="loginPassword" type="password" placeholder="Password">
-    <button class="main" onclick="login()">Login</button>
-  </div>
+        <!-- ==================== LOGIN FORM ==================== -->
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input 
+                    type="email" 
+                    class="form-input" 
+                    placeholder="you@example.com"
+                    id="loginEmail"
+                    required
+                >
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input 
+                    type="password" 
+                    class="form-input" 
+                    placeholder="Enter your password"
+                    id="loginPassword"
+                    required
+                >
+            </div>
+            <div class="form-options">
+                <label class="remember-me">
+                    <input type="checkbox" id="rememberMe">
+                    <span>Remember me</span>
+                </label>
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+            <button type="submit" class="btn-submit">Sign In</button>
+        </form>
 
-  <!-- REGISTER -->
-  <div id="registerBox" style="display:none">
-    <input id="regName" placeholder="Full Name">
-    <input id="regEmail" placeholder="Email">
-    <input id="regPassword" type="password" placeholder="Password">
-    <button class="main" onclick="register()">Create Account</button>
-  </div>
+        <!-- ==================== REGISTER FORM ==================== -->
+        <form id="registerForm" class="hidden" onsubmit="handleRegister(event)">
+            <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input 
+                    type="text" 
+                    class="form-input" 
+                    placeholder="John Doe"
+                    id="regName"
+                    required
+                >
+            </div>
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input 
+                    type="email" 
+                    class="form-input" 
+                    placeholder="you@example.com"
+                    id="regEmail"
+                    required
+                >
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input 
+                    type="password" 
+                    class="form-input" 
+                    placeholder="At least 8 characters"
+                    id="regPassword"
+                    minlength="8"
+                    required
+                >
+            </div>
+            <div class="form-group">
+                <label class="form-label">Confirm Password</label>
+                <input 
+                    type="password" 
+                    class="form-input" 
+                    placeholder="Confirm your password"
+                    id="regConfirmPassword"
+                    minlength="8"
+                    required
+                >
+            </div>
+            <button type="submit" class="btn-submit">Create Account</button>
+        </form>
 
-  <div class="msg" id="msg"></div>
-</div>
+        <!-- ==================== MESSAGE DISPLAY ==================== -->
+        <div id="message" class="message"></div>
+    </div>
 
-<!-- FIREBASE (REAL CONFIG) -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+    <!-- ==================== JAVASCRIPT (UI ONLY - NO BACKEND) ==================== -->
+    <script>
+        /**
+         * Tab switching functionality
+         * Toggles between login and register forms
+         */
+        function showLogin() {
+            // Update form visibility
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+            
+            // Update tab buttons
+            const tabs = document.querySelectorAll('.tab-button');
+            tabs[0].classList.add('active');
+            tabs[1].classList.remove('active');
+            
+            // Clear message
+            clearMessage();
+        }
 
-/* ✅ YOUR REAL FIREBASE CONFIG */
-const firebaseConfig = {
-  apiKey: "AIzaSyBt5enDVu9T_WVP3iJw_eOBc9dKrLME_Xo",
-  authDomain: "skillexchange-706.firebaseapp.com",
-  projectId: "skillexchange-706",
-  storageBucket: "skillexchange-706.firebasestorage.app",
-  messagingSenderId: "853922656544",
-  appId: "1:853922656544:web:90a547a7a09a771b9ce745"
-};
+        function showRegister() {
+            // Update form visibility
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.remove('hidden');
+            
+            // Update tab buttons
+            const tabs = document.querySelectorAll('.tab-button');
+            tabs[0].classList.remove('active');
+            tabs[1].classList.add('active');
+            
+            // Clear message
+            clearMessage();
+        }
 
-/* INIT */
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+        /**
+         * Handle login form submission (UI ONLY)
+         * In a real application, this would connect to a backend
+         */
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Simple validation
+            if (!email || !password) {
+                showMessage('Please fill in all fields', 'error');
+                return;
+            }
+            
+            // Simulate successful login (UI only - no actual authentication)
+            showMessage('Login successful! Redirecting...', 'success');
+            
+            // Store user info in localStorage for demo purposes
+            localStorage.setItem('user', JSON.stringify({
+                email: email,
+                name: email.split('@')[0],
+                loggedIn: true
+            }));
+            
+            // Redirect to dashboard after short delay
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1500);
+        }
 
-const msg = document.getElementById("msg");
+        /**
+         * Handle registration form submission (UI ONLY)
+         * In a real application, this would connect to a backend
+         */
+        function handleRegister(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+            
+            // Validation
+            if (!name || !email || !password || !confirmPassword) {
+                showMessage('Please fill in all fields', 'error');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showMessage('Passwords do not match', 'error');
+                return;
+            }
+            
+            if (password.length < 8) {
+                showMessage('Password must be at least 8 characters', 'error');
+                return;
+            }
+            
+            // Simulate successful registration (UI only - no actual backend)
+            showMessage('Account created successfully! Redirecting...', 'success');
+            
+            // Store user info in localStorage for demo purposes
+            localStorage.setItem('user', JSON.stringify({
+                email: email,
+                name: name,
+                loggedIn: true
+            }));
+            
+            // Redirect to dashboard after short delay
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1500);
+        }
 
-/* UI TOGGLE */
-window.showLogin = function(){
-  loginBox.style.display="block";
-  registerBox.style.display="none";
-  loginTab.classList.add("active");
-  registerTab.classList.remove("active");
-  title.innerText="Login";
-  msg.innerText="";
-};
+        /**
+         * Display message to user
+         * @param {string} text - Message to display
+         * @param {string} type - Message type ('success' or 'error')
+         */
+        function showMessage(text, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = text;
+            messageEl.className = `message ${type}`;
+        }
 
-window.showRegister = function(){
-  loginBox.style.display="none";
-  registerBox.style.display="block";
-  registerTab.classList.add("active");
-  loginTab.classList.remove("active");
-  title.innerText="Register";
-  msg.innerText="";
-};
-
-/* LOGIN */
-window.login = function(){
-  msg.innerText="Logging in...";
-  signInWithEmailAndPassword(
-    auth,
-    loginEmail.value,
-    loginPassword.value
-  )
-  .then(()=>{
-    // redirect to main app
-    window.location.href = "index.html";
-  })
-  .catch(err=>{
-    msg.innerText = err.message;
-  });
-};
-
-/* REGISTER */
-window.register = function(){
-  msg.innerText="Creating account...";
-  createUserWithEmailAndPassword(
-    auth,
-    regEmail.value,
-    regPassword.value
-  )
-  .then(()=>{
-    window.location.href = "app.html";
-  })
-  .catch(err=>{
-    msg.innerText = err.message;
-  });
-};
-</script>
-
+        /**
+         * Clear message display
+         */
+        function clearMessage() {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = '';
+            messageEl.className = 'message';
+        }
+    </script>
 </body>
-  </html>
+</html>
