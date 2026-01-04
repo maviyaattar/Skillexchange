@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Leave and view feedback">
+  <title>Feedback - SkillExchange</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+          ✨ SkillExchange
+        </a>
+        
+        <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+        
+        <ul class="navbar-nav">
+          <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+          <li><a href="matches.html" class="nav-link">Matches</a></li>
+          <li><a href="inbox.html" class="nav-link">Inbox</a></li>
+          <li><a href="requests.html" class="nav-link">Requests</a></li>
+          <li><a href="profile.html" class="nav-link">Profile</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main style="padding: var(--spacing-xl) 0;">
+    <div class="container">
+      <!-- Page Header -->
+      <div style="margin-bottom: var(--spacing-xl);">
+        <h1 class="fade-in">Feedback & Reviews ⭐</h1>
+        <p class="text-secondary">Share your experience and help build trust in our community</p>
+      </div>
+
+      <!-- Main Grid -->
+      <div class="grid" style="grid-template-columns: 1fr 1fr; gap: var(--spacing-lg);">
+        <!-- Leave Feedback -->
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Leave Feedback</h3>
+            </div>
+            <div class="card-body">
+              <form id="feedbackForm">
+                <div class="form-group">
+                  <label class="form-label" for="exchangePartner">Select Exchange Partner</label>
+                  <select class="form-select" id="exchangePartner" required>
+                    <option value="">Choose a partner...</option>
+                    <option value="sarah">Sarah Martinez - Python Exchange</option>
+                    <option value="michael">Michael Johnson - UI/UX Exchange</option>
+                    <option value="emma">Emma Lee - DevOps Exchange</option>
+                    <option value="tom">Tom Chen - Data Science Exchange</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Rating</label>
+                  <div class="rating" style="font-size: 2rem;" id="ratingInput">
+                    <span class="star" data-rating="1">★</span>
+                    <span class="star" data-rating="2">★</span>
+                    <span class="star" data-rating="3">★</span>
+                    <span class="star" data-rating="4">★</span>
+                    <span class="star" data-rating="5">★</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="reviewText">Your Review</label>
+                  <textarea 
+                    id="reviewText" 
+                    class="form-textarea" 
+                    placeholder="Share your experience with this exchange partner..."
+                    required
+                    style="min-height: 150px;"
+                  ></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" id="anonymous" style="cursor: pointer;">
+                    <span class="text-secondary" style="font-size: 0.875rem;">Leave review anonymously</span>
+                  </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                  Submit Review
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pending Reviews -->
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Pending Reviews</h3>
+            </div>
+            <div class="card-body">
+              <p class="text-secondary" style="margin-bottom: var(--spacing-md);">
+                Complete these reviews to help your exchange partners build their reputation
+              </p>
+
+              <div style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+                <div class="user-card">
+                  <div class="user-avatar">SM</div>
+                  <div class="user-info" style="flex: 1;">
+                    <div class="user-name">Sarah Martinez</div>
+                    <div class="user-role">Python Exchange - Completed 3 days ago</div>
+                  </div>
+                  <button class="btn btn-primary btn-sm" onclick="quickReview('Sarah Martinez')">Review</button>
+                </div>
+
+                <div class="user-card">
+                  <div class="user-avatar">MJ</div>
+                  <div class="user-info" style="flex: 1;">
+                    <div class="user-name">Michael Johnson</div>
+                    <div class="user-role">UI/UX Exchange - Completed 5 days ago</div>
+                  </div>
+                  <button class="btn btn-primary btn-sm" onclick="quickReview('Michael Johnson')">Review</button>
+                </div>
+
+                <div class="user-card">
+                  <div class="user-avatar">EL</div>
+                  <div class="user-info" style="flex: 1;">
+                    <div class="user-name">Emma Lee</div>
+                    <div class="user-role">DevOps Exchange - Completed 1 week ago</div>
+                  </div>
+                  <button class="btn btn-primary btn-sm" onclick="quickReview('Emma Lee')">Review</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Feedback Received -->
+      <div class="card mt-lg">
+        <div class="card-header">
+          <h3>Recent Feedback You've Received</h3>
+        </div>
+        <div class="card-body">
+          <div style="display: flex; flex-direction: column; gap: var(--spacing-lg);">
+            <!-- Review 1 -->
+            <div style="padding: var(--spacing-md); background: var(--dark-bg-tertiary); border-radius: var(--radius-md);">
+              <div class="flex-between" style="margin-bottom: var(--spacing-sm);">
+                <div class="flex" style="align-items: center; gap: var(--spacing-sm);">
+                  <div class="user-avatar" style="width: 40px; height: 40px; font-size: 1rem;">TC</div>
+                  <div>
+                    <strong>Tom Chen</strong>
+                    <div style="font-size: 0.875rem; color: var(--text-muted);">React Exchange</div>
+                  </div>
+                </div>
+                <div class="rating" style="font-size: 1rem;">
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                </div>
+              </div>
+              <p class="text-secondary" style="margin-bottom: var(--spacing-sm);">
+                "Excellent teacher! Very patient and explained concepts clearly. The React sessions were well-structured and I learned so much. Highly recommend!"
+              </p>
+              <div class="text-muted" style="font-size: 0.75rem;">2 days ago</div>
+            </div>
+
+            <!-- Review 2 -->
+            <div style="padding: var(--spacing-md); background: var(--dark-bg-tertiary); border-radius: var(--radius-md);">
+              <div class="flex-between" style="margin-bottom: var(--spacing-sm);">
+                <div class="flex" style="align-items: center; gap: var(--spacing-sm);">
+                  <div class="user-avatar" style="width: 40px; height: 40px; font-size: 1rem;">RK</div>
+                  <div>
+                    <strong>Rachel Kim</strong>
+                    <div style="font-size: 0.875rem; color: var(--text-muted);">Node.js Exchange</div>
+                  </div>
+                </div>
+                <div class="rating" style="font-size: 1rem;">
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star">★</span>
+                </div>
+              </div>
+              <p class="text-secondary" style="margin-bottom: var(--spacing-sm);">
+                "Great knowledge of Node.js and backend development. Sessions were informative and practical. Would exchange again!"
+              </p>
+              <div class="text-muted" style="font-size: 0.75rem;">1 week ago</div>
+            </div>
+
+            <!-- Review 3 -->
+            <div style="padding: var(--spacing-md); background: var(--dark-bg-tertiary); border-radius: var(--radius-md);">
+              <div class="flex-between" style="margin-bottom: var(--spacing-sm);">
+                <div class="flex" style="align-items: center; gap: var(--spacing-sm);">
+                  <div class="user-avatar" style="width: 40px; height: 40px; font-size: 1rem;">JD</div>
+                  <div>
+                    <strong>James Davis</strong>
+                    <div style="font-size: 0.875rem; color: var(--text-muted);">JavaScript Exchange</div>
+                  </div>
+                </div>
+                <div class="rating" style="font-size: 1rem;">
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                </div>
+              </div>
+              <p class="text-secondary" style="margin-bottom: var(--spacing-sm);">
+                "Amazing experience! Very responsive and always prepared for our sessions. Learned modern JavaScript practices and ES6+ features."
+              </p>
+              <div class="text-muted" style="font-size: 0.75rem;">2 weeks ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 SkillExchange. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script>
+    let selectedRating = 0;
+
+    // Rating interaction
+    const stars = document.querySelectorAll('#ratingInput .star');
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        selectedRating = parseInt(star.getAttribute('data-rating'));
+        updateStars(selectedRating);
+      });
+
+      star.addEventListener('mouseenter', () => {
+        const rating = parseInt(star.getAttribute('data-rating'));
+        updateStars(rating);
+      });
+    });
+
+    document.getElementById('ratingInput').addEventListener('mouseleave', () => {
+      updateStars(selectedRating);
+    });
+
+    function updateStars(rating) {
+      stars.forEach((star, index) => {
+        if (index < rating) {
+          star.classList.add('filled');
+        } else {
+          star.classList.remove('filled');
+        }
+      });
+    }
+
+    // Form submission
+    document.getElementById('feedbackForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      if (selectedRating === 0) {
+        SkillExchange.showAlert('Please select a rating', 'error');
+        return;
+      }
+
+      const partner = document.getElementById('exchangePartner').value;
+      const review = document.getElementById('reviewText').value;
+      const anonymous = document.getElementById('anonymous').checked;
+
+      SkillExchange.showAlert('Review submitted successfully! Thank you for your feedback.', 'success');
+
+      // Reset form
+      e.target.reset();
+      selectedRating = 0;
+      updateStars(0);
+    });
+
+    function quickReview(name) {
+      document.getElementById('exchangePartner').value = name.toLowerCase().split(' ')[0];
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      SkillExchange.showAlert(`Ready to review ${name}`, 'info');
+    }
+  </script>
+</body>
+</html>

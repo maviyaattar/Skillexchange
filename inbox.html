@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your messages and chats">
+  <title>Inbox - SkillExchange</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+          ✨ SkillExchange
+        </a>
+        
+        <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+        
+        <ul class="navbar-nav">
+          <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+          <li><a href="matches.html" class="nav-link">Matches</a></li>
+          <li><a href="inbox.html" class="nav-link active">Inbox</a></li>
+          <li><a href="requests.html" class="nav-link">Requests</a></li>
+          <li><a href="profile.html" class="nav-link">Profile</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main style="padding: var(--spacing-xl) 0;">
+    <div class="container">
+      <!-- Page Header -->
+      <div style="margin-bottom: var(--spacing-xl);">
+        <h1 class="fade-in">Messages 💬</h1>
+        <p class="text-secondary">Chat with your skill exchange partners</p>
+      </div>
+
+      <!-- Chat Container -->
+      <div class="chat-container">
+        <!-- Chat List Sidebar -->
+        <div class="chat-list">
+          <div style="margin-bottom: var(--spacing-md);">
+            <input type="text" class="form-input" placeholder="Search messages..." style="margin-bottom: 0;">
+          </div>
+
+          <!-- Message Previews -->
+          <div style="display: flex; flex-direction: column; gap: var(--spacing-sm);">
+            <div class="message-preview unread" onclick="selectChat('Sarah Martinez', 'SM')">
+              <div class="message-avatar">SM</div>
+              <div class="message-content">
+                <div class="message-header">
+                  <span class="message-sender">Sarah Martinez</span>
+                  <span class="message-time">5m</span>
+                </div>
+                <div class="message-text">That sounds great! When are you...</div>
+              </div>
+            </div>
+
+            <div class="message-preview" onclick="selectChat('Michael Johnson', 'MJ')">
+              <div class="message-avatar">MJ</div>
+              <div class="message-content">
+                <div class="message-header">
+                  <span class="message-sender">Michael Johnson</span>
+                  <span class="message-time">2h</span>
+                </div>
+                <div class="message-text">Thanks for the design feedback!</div>
+              </div>
+            </div>
+
+            <div class="message-preview" onclick="selectChat('Emma Lee', 'EL')">
+              <div class="message-avatar">EL</div>
+              <div class="message-content">
+                <div class="message-header">
+                  <span class="message-sender">Emma Lee</span>
+                  <span class="message-time">1d</span>
+                </div>
+                <div class="message-text">Let's schedule our next session</div>
+              </div>
+            </div>
+
+            <div class="message-preview" onclick="selectChat('Tom Chen', 'TC')">
+              <div class="message-avatar">TC</div>
+              <div class="message-content">
+                <div class="message-header">
+                  <span class="message-sender">Tom Chen</span>
+                  <span class="message-time">2d</span>
+                </div>
+                <div class="message-text">Really enjoyed our Python session</div>
+              </div>
+            </div>
+
+            <div class="message-preview" onclick="selectChat('Rachel Kim', 'RK')">
+              <div class="message-avatar">RK</div>
+              <div class="message-content">
+                <div class="message-header">
+                  <span class="message-sender">Rachel Kim</span>
+                  <span class="message-time">3d</span>
+                </div>
+                <div class="message-text">Got it working, thanks!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Window -->
+        <div class="chat-window">
+          <!-- Chat Header -->
+          <div style="padding: var(--spacing-md); border-bottom: 1px solid var(--dark-surface); display: flex; align-items: center; gap: var(--spacing-md);">
+            <div class="message-avatar" id="chatAvatar">SM</div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600; font-size: 1.125rem;" id="chatName">Sarah Martinez</div>
+              <div style="color: var(--text-muted); font-size: 0.875rem;">Online</div>
+            </div>
+            <button class="btn btn-ghost btn-sm">View Profile</button>
+          </div>
+
+          <!-- Messages Area -->
+          <div class="chat-messages" id="chatMessages">
+            <!-- Received Message -->
+            <div class="chat-message">
+              <div class="message-avatar">SM</div>
+              <div>
+                <div class="chat-bubble">
+                  <p style="margin: 0;">Hi! I saw your profile and I'm really interested in learning React from you.</p>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">10:30 AM</div>
+              </div>
+            </div>
+
+            <!-- Sent Message -->
+            <div class="chat-message sent">
+              <div class="message-avatar">AJ</div>
+              <div>
+                <div class="chat-bubble">
+                  <p style="margin: 0;">That's great! I'd love to help. I'm also interested in learning Python from you.</p>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">10:35 AM</div>
+              </div>
+            </div>
+
+            <!-- Received Message -->
+            <div class="chat-message">
+              <div class="message-avatar">SM</div>
+              <div>
+                <div class="chat-bubble">
+                  <p style="margin: 0;">Perfect! I have experience teaching Python. When would be a good time for our first session?</p>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">10:40 AM</div>
+              </div>
+            </div>
+
+            <!-- Sent Message -->
+            <div class="chat-message sent">
+              <div class="message-avatar">AJ</div>
+              <div>
+                <div class="chat-bubble">
+                  <p style="margin: 0;">How about this Wednesday at 3 PM? We could do a video call.</p>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">10:42 AM</div>
+              </div>
+            </div>
+
+            <!-- Received Message -->
+            <div class="chat-message">
+              <div class="message-avatar">SM</div>
+              <div>
+                <div class="chat-bubble">
+                  <p style="margin: 0;">That sounds great! When are you available for the React session?</p>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Just now</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Message Input -->
+          <div class="chat-input-container">
+            <input type="text" class="chat-input form-input" placeholder="Type a message..." id="messageInput">
+            <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 SkillExchange. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script>
+    function selectChat(name, avatar) {
+      document.getElementById('chatName').textContent = name;
+      document.getElementById('chatAvatar').textContent = avatar;
+      
+      // Remove unread indicator
+      document.querySelectorAll('.message-preview').forEach(preview => {
+        preview.classList.remove('unread');
+      });
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('messageInput');
+      const message = input.value.trim();
+      
+      if (!message) return;
+      
+      // Add message to chat
+      const messagesContainer = document.getElementById('chatMessages');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'chat-message sent';
+      messageDiv.innerHTML = `
+        <div class="message-avatar">AJ</div>
+        <div>
+          <div class="chat-bubble">
+            <p style="margin: 0;">${message}</p>
+          </div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Just now</div>
+        </div>
+      `;
+      
+      messagesContainer.appendChild(messageDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      
+      // Clear input
+      input.value = '';
+      
+      SkillExchange.showAlert('Message sent!', 'success');
+    }
+
+    // Send message on Enter key
+    document.getElementById('messageInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    });
+
+    // Auto-scroll to bottom of messages
+    window.addEventListener('load', () => {
+      const messagesContainer = document.getElementById('chatMessages');
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    });
+  </script>
+</body>
+</html>

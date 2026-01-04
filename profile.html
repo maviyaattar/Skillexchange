@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your SkillExchange Profile">
+  <title>Profile - SkillExchange</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+          ✨ SkillExchange
+        </a>
+        
+        <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+        
+        <ul class="navbar-nav">
+          <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+          <li><a href="matches.html" class="nav-link">Matches</a></li>
+          <li><a href="inbox.html" class="nav-link">Inbox</a></li>
+          <li><a href="requests.html" class="nav-link">Requests</a></li>
+          <li><a href="profile.html" class="nav-link active">Profile</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main style="padding: var(--spacing-xl) 0;">
+    <div class="container">
+      <!-- Profile Header -->
+      <div class="card mb-lg">
+        <div style="text-align: center; padding: var(--spacing-lg) 0;">
+          <div class="user-avatar" style="width: 120px; height: 120px; font-size: 3rem; margin: 0 auto var(--spacing-md);" id="profileAvatar">
+            AJ
+          </div>
+          <h1 id="profileName">Alex Johnson</h1>
+          <p class="text-secondary" id="profileEmail">alex@skillexchange.com</p>
+          <div class="flex-center gap-sm" style="margin-top: var(--spacing-md); flex-wrap: wrap;">
+            <button class="btn btn-primary" data-modal-trigger="editProfileModal">Edit Profile</button>
+            <button class="btn btn-outline" onclick="logout()">Logout</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Details Grid -->
+      <div class="grid" style="grid-template-columns: 2fr 1fr; gap: var(--spacing-lg);">
+        <!-- Main Profile Info -->
+        <div>
+          <!-- Bio Section -->
+          <div class="card mb-lg">
+            <div class="card-header">
+              <h3>About Me</h3>
+            </div>
+            <div class="card-body">
+              <p id="profileBio" class="text-secondary">Full-stack developer passionate about learning new skills and sharing knowledge with others. I love building web applications and exploring new technologies.</p>
+            </div>
+          </div>
+
+          <!-- Skills Offering -->
+          <div class="card mb-lg">
+            <div class="card-header">
+              <h3>Skills I Can Teach</h3>
+            </div>
+            <div class="card-body">
+              <div id="skillsOffering" style="display: flex; flex-wrap: wrap; gap: var(--spacing-sm);">
+                <span class="skill-tag selected">JavaScript</span>
+                <span class="skill-tag selected">React</span>
+                <span class="skill-tag selected">Node.js</span>
+                <span class="skill-tag selected">UI/UX Design</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skills Seeking -->
+          <div class="card mb-lg">
+            <div class="card-header">
+              <h3>Skills I Want to Learn</h3>
+            </div>
+            <div class="card-body">
+              <div id="skillsSeeking" style="display: flex; flex-wrap: wrap; gap: var(--spacing-sm);">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Machine Learning</span>
+                <span class="skill-tag">Data Analysis</span>
+                <span class="skill-tag">Cloud Architecture</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reviews Section -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Reviews & Ratings</h3>
+            </div>
+            <div class="card-body">
+              <div style="text-align: center; margin-bottom: var(--spacing-lg);">
+                <div class="stat-value">4.8</div>
+                <div class="rating" style="justify-content: center; font-size: 1.5rem; margin-bottom: var(--spacing-sm);">
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star filled">★</span>
+                  <span class="star">★</span>
+                </div>
+                <p class="text-secondary">Based on 24 reviews</p>
+              </div>
+
+              <!-- Individual Reviews -->
+              <div style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+                <div style="padding: var(--spacing-md); background: var(--dark-bg-tertiary); border-radius: var(--radius-md);">
+                  <div class="flex-between" style="margin-bottom: var(--spacing-sm);">
+                    <strong>Sarah Martinez</strong>
+                    <div class="rating" style="font-size: 0.875rem;">
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                    </div>
+                  </div>
+                  <p class="text-secondary" style="font-size: 0.875rem; margin: 0;">Great teacher! Very patient and explained React concepts clearly. Highly recommend!</p>
+                  <p class="text-muted" style="font-size: 0.75rem; margin-top: var(--spacing-xs);">2 days ago</p>
+                </div>
+
+                <div style="padding: var(--spacing-md); background: var(--dark-bg-tertiary); border-radius: var(--radius-md);">
+                  <div class="flex-between" style="margin-bottom: var(--spacing-sm);">
+                    <strong>Michael Chen</strong>
+                    <div class="rating" style="font-size: 0.875rem;">
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star filled">★</span>
+                      <span class="star">★</span>
+                    </div>
+                  </div>
+                  <p class="text-secondary" style="font-size: 0.875rem; margin: 0;">Excellent UI/UX knowledge. Learned a lot about design principles.</p>
+                  <p class="text-muted" style="font-size: 0.75rem; margin-top: var(--spacing-xs);">1 week ago</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Stats -->
+        <div>
+          <!-- Profile Stats -->
+          <div class="card mb-lg">
+            <div class="card-header">
+              <h4>Stats</h4>
+            </div>
+            <div class="card-body">
+              <div style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+                <div style="text-align: center;">
+                  <div class="stat-value" style="font-size: 2rem;">12</div>
+                  <div class="stat-label">Exchanges</div>
+                </div>
+                <div style="text-align: center;">
+                  <div class="stat-value" style="font-size: 2rem;">45</div>
+                  <div class="stat-label">Connections</div>
+                </div>
+                <div style="text-align: center;">
+                  <div class="stat-value" style="font-size: 2rem;">24</div>
+                  <div class="stat-label">Reviews</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Member Since -->
+          <div class="card">
+            <div class="card-header">
+              <h4>Member Info</h4>
+            </div>
+            <div class="card-body">
+              <p class="text-secondary" style="font-size: 0.875rem; margin-bottom: var(--spacing-sm);">
+                <strong>Member Since:</strong><br>
+                January 2026
+              </p>
+              <p class="text-secondary" style="font-size: 0.875rem; margin-bottom: var(--spacing-sm);">
+                <strong>Response Time:</strong><br>
+                Within 2 hours
+              </p>
+              <p class="text-secondary" style="font-size: 0.875rem; margin: 0;">
+                <strong>Completion Rate:</strong><br>
+                95%
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Edit Profile Modal -->
+  <div id="editProfileModal" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Edit Profile</h3>
+        <button class="modal-close" aria-label="Close modal">×</button>
+      </div>
+      <form id="editProfileForm">
+        <div class="form-group">
+          <label class="form-label" for="editName">Full Name</label>
+          <input type="text" id="editName" class="form-input" required>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="editBio">Bio</label>
+          <textarea id="editBio" class="form-textarea" placeholder="Tell others about yourself"></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="editSkillsOffering">Skills I Can Teach (comma-separated)</label>
+          <input type="text" id="editSkillsOffering" class="form-input" placeholder="JavaScript, React, Node.js">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="editSkillsSeeking">Skills I Want to Learn (comma-separated)</label>
+          <input type="text" id="editSkillsSeeking" class="form-input" placeholder="Python, ML, Cloud">
+        </div>
+        
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 SkillExchange. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script>
+    // Load user data
+    const user = SkillExchange.getCurrentUser();
+    if (user) {
+      document.getElementById('profileName').textContent = user.name;
+      document.getElementById('profileEmail').textContent = user.email;
+      document.getElementById('profileAvatar').textContent = user.avatar;
+      document.getElementById('profileBio').textContent = user.bio || 'Full-stack developer passionate about learning new skills.';
+      
+      // Load into edit form
+      document.getElementById('editName').value = user.name;
+      document.getElementById('editBio').value = user.bio || '';
+      
+      if (user.skills) {
+        document.getElementById('editSkillsOffering').value = user.skills.offering.join(', ');
+        document.getElementById('editSkillsSeeking').value = user.skills.seeking.join(', ');
+      }
+    }
+
+    // Handle profile edit
+    document.getElementById('editProfileForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('editName').value;
+      const bio = document.getElementById('editBio').value;
+      const skillsOffering = document.getElementById('editSkillsOffering').value.split(',').map(s => s.trim()).filter(s => s);
+      const skillsSeeking = document.getElementById('editSkillsSeeking').value.split(',').map(s => s.trim()).filter(s => s);
+      
+      // Update user data
+      const updatedUser = {
+        ...user,
+        name: name,
+        bio: bio,
+        avatar: SkillExchange.createAvatar(name),
+        skills: {
+          offering: skillsOffering,
+          seeking: skillsSeeking
+        }
+      };
+      
+      SkillExchange.setCurrentUser(updatedUser);
+      SkillExchange.showAlert('Profile updated successfully!', 'success');
+      
+      // Close modal and reload
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    });
+
+    // Logout function
+    function logout() {
+      SkillExchange.storage.clear();
+      SkillExchange.showAlert('Logged out successfully', 'success');
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
