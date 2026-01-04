@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Login to SkillExchange">
+  <title>Login - SkillExchange</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: var(--spacing-md);
+    }
+    
+    .auth-container {
+      width: 100%;
+      max-width: 450px;
+    }
+    
+    .auth-card {
+      background: var(--dark-bg-secondary);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-xl);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .auth-header {
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .auth-logo {
+      font-size: 3rem;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .auth-footer {
+      text-align: center;
+      margin-top: var(--spacing-lg);
+      color: var(--text-secondary);
+    }
+    
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: var(--spacing-lg) 0;
+      color: var(--text-muted);
+    }
+    
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid var(--dark-surface);
+    }
+    
+    .divider span {
+      padding: 0 var(--spacing-sm);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="auth-container fade-in">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-logo">✨</div>
+        <h1>Welcome Back</h1>
+        <p class="text-secondary">Login to continue your learning journey</p>
+      </div>
+      
+      <form id="loginForm">
+        <div class="form-group">
+          <label class="form-label" for="email">Email Address</label>
+          <input 
+            type="email" 
+            id="email" 
+            class="form-input" 
+            placeholder="your@email.com"
+            required
+            autocomplete="email"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            class="form-input" 
+            placeholder="Enter your password"
+            required
+            autocomplete="current-password"
+          >
+        </div>
+        
+        <div class="flex-between" style="margin-bottom: var(--spacing-lg);">
+          <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+            <input type="checkbox" id="remember" style="cursor: pointer;">
+            <span class="text-secondary">Remember me</span>
+          </label>
+          <a href="#forgot" class="text-secondary" style="font-size: 0.875rem;">Forgot Password?</a>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" style="width: 100%;">
+          Login
+        </button>
+      </form>
+      
+      <div class="auth-footer">
+        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+        <p style="margin-top: var(--spacing-sm);"><a href="index.html">← Back to Home</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      if (!SkillExchange.validateForm(e.target)) {
+        return;
+      }
+      
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const remember = document.getElementById('remember').checked;
+      
+      // Mock login - in production, this would call an API
+      const user = {
+        ...SkillExchange.mockUser,
+        email: email
+      };
+      
+      SkillExchange.setCurrentUser(user);
+      SkillExchange.showAlert('Login successful! Redirecting...', 'success');
+      
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

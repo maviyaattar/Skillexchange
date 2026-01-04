@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Find skill exchange matches">
+  <title>Find Matches - SkillExchange</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+          ✨ SkillExchange
+        </a>
+        
+        <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+        
+        <ul class="navbar-nav">
+          <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+          <li><a href="matches.html" class="nav-link active">Matches</a></li>
+          <li><a href="inbox.html" class="nav-link">Inbox</a></li>
+          <li><a href="requests.html" class="nav-link">Requests</a></li>
+          <li><a href="profile.html" class="nav-link">Profile</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main style="padding: var(--spacing-xl) 0;">
+    <div class="container">
+      <!-- Page Header -->
+      <div style="margin-bottom: var(--spacing-xl);">
+        <h1 class="fade-in">Find Your Perfect Match 🎯</h1>
+        <p class="text-secondary">Connect with people who want to learn what you teach and teach what you want to learn</p>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="card mb-lg">
+        <div class="card-body">
+          <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-sm);">
+            <div class="form-group" style="margin-bottom: 0;">
+              <input type="text" id="searchInput" class="form-input" placeholder="Search by skill...">
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <select class="form-select" id="matchSort">
+                <option value="score">Best Match</option>
+                <option value="rating">Highest Rated</option>
+                <option value="newest">Newest Members</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Matches Grid -->
+      <div class="grid grid-3" id="matchesGrid">
+        <!-- Match Card 1 -->
+        <div class="match-card">
+          <div class="match-header">
+            <div class="match-avatar">SM</div>
+            <div class="match-score">95% Match</div>
+          </div>
+          <div class="match-body">
+            <div class="match-name">Sarah Martinez</div>
+            <div class="match-bio">Python developer eager to learn frontend frameworks</div>
+            
+            <div style="margin: var(--spacing-md) 0;">
+              <p class="text-secondary" style="font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Can teach:</p>
+              <div class="match-skills">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Django</span>
+                <span class="skill-tag">ML</span>
+              </div>
+            </div>
+            
+            <div style="margin-bottom: var(--spacing-md);">
+              <p class="text-secondary" style="font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Wants to learn:</p>
+              <div class="match-skills">
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">JavaScript</span>
+              </div>
+            </div>
+            
+            <div class="flex-center gap-sm">
+              <div class="rating" style="font-size: 0.875rem; justify-content: center;">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+              </div>
+              <span class="text-muted" style="font-size: 0.875rem;">(18 reviews)</span>
+            </div>
+            
+            <div style="display: flex; gap: var(--spacing-sm); margin-top: var(--spacing-md);">
+              <button class="btn btn-primary" style="flex: 1;" onclick="sendRequest('Sarah Martinez')">Connect</button>
+              <button class="btn btn-outline" style="flex: 1;" onclick="viewProfile('Sarah Martinez')">View Profile</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Match Card 2 -->
+        <div class="match-card">
+          <div class="match-header">
+            <div class="match-avatar">MJ</div>
+            <div class="match-score">88% Match</div>
+          </div>
+          <div class="match-body">
+            <div class="match-name">Michael Johnson</div>
+            <div class="match-bio">UI/UX designer looking to improve coding skills</div>
+            
+            <div style="margin: var(--spacing-md) 0;">
+              <p class="text-secondary" style="font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Can teach:</p>
+              <div class="match-skills">
+                <span class="skill-tag">UI/UX</span>
+                <span class="skill-tag">Figma</span>
+                <span class="skill-tag">Design</span>
+              </div>
+            </div>
+            
+            <div style="margin-bottom: var(--spacing-md);">
+              <p class="text-secondary" style="font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Wants to learn:</p>
+              <div class="match-skills">
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">CSS</span>
+              </div>
+            </div>
+            
+            <div class="flex-center gap-sm">
+              <div class="rating" style="font-size: 0.875rem; justify-content: center;">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star">★</span>
+              </div>
+              <span class="text-muted" style="font-size: 0.875rem;">(12 reviews)</span>
+            </div>
+            
+            <div style="display: flex; gap: var(--spacing-sm); margin-top: var(--spacing-md);">
+              <button class="btn btn-primary" style="flex: 1;" onclick="sendRequest('Michael Johnson')">Connect</button>
+              <button class="btn btn-outline" style="flex: 1;" onclick="viewProfile('Michael Johnson')">View Profile</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Match Card 3 -->
+        <div class="match-card">
+          <div class="match-header">
+            <div class="match-avatar">EL</div>
+            <div class="match-score">85% Match</div>
+          </div>
+          <div class="match-body">
+            <div class="match-name">Emma Lee</div>
+            <div class="match-bio">DevOps engineer passionate about cloud technologies</div>
+            
+            <div style="margin: var(--spacing-md) 0;">
+              <p class="text-secondary" style="font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Can teach:</p>
+              <div class="match-skills">
+                <span class="skill-tag">DevOps</span>
+                <span class="skill-tag">AWS</span>
+                <span class="skill-tag">Docker</span>
+              </div>
+            </div>
+            
+            <div style="margin-bottom: var(--spacing-md);">
+              <p class="text-secondary" style="font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Wants to learn:</p>
+              <div class="match-skills">
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">React</span>
+              </div>
+            </div>
+            
+            <div class="flex-center gap-sm">
+              <div class="rating" style="font-size: 0.875rem; justify-content: center;">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+              </div>
+              <span class="text-muted" style="font-size: 0.875rem;">(25 reviews)</span>
+            </div>
+            
+            <div style="display: flex; gap: var(--spacing-sm); margin-top: var(--spacing-md);">
+              <button class="btn btn-primary" style="flex: 1;" onclick="sendRequest('Emma Lee')">Connect</button>
+              <button class="btn btn-outline" style="flex: 1;" onclick="viewProfile('Emma Lee')">View Profile</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Match Card 4 -->
+        <div class="match-card">
+          <div class="match-header">
+            <div class="match-avatar">TC</div>
+            <div class="match-score">82% Match</div>
+          </div>
+          <div class="match-body">
+            <div class="match-name">Tom Chen</div>
+            <div class="match-bio">Data scientist exploring web development</div>
+            
+            <div style="margin: var(--spacing-md) 0;">
+              <p class="text-secondary" style="font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Can teach:</p>
+              <div class="match-skills">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Data Science</span>
+                <span class="skill-tag">SQL</span>
+              </div>
+            </div>
+            
+            <div style="margin-bottom: var(--spacing-md);">
+              <p class="text-secondary" style="font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Wants to learn:</p>
+              <div class="match-skills">
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">Web Dev</span>
+              </div>
+            </div>
+            
+            <div class="flex-center gap-sm">
+              <div class="rating" style="font-size: 0.875rem; justify-content: center;">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star">★</span>
+              </div>
+              <span class="text-muted" style="font-size: 0.875rem;">(8 reviews)</span>
+            </div>
+            
+            <div style="display: flex; gap: var(--spacing-sm); margin-top: var(--spacing-md);">
+              <button class="btn btn-primary" style="flex: 1;" onclick="sendRequest('Tom Chen')">Connect</button>
+              <button class="btn btn-outline" style="flex: 1;" onclick="viewProfile('Tom Chen')">View Profile</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Match Card 5 -->
+        <div class="match-card">
+          <div class="match-header">
+            <div class="match-avatar">RK</div>
+            <div class="match-score">78% Match</div>
+          </div>
+          <div class="match-body">
+            <div class="match-name">Rachel Kim</div>
+            <div class="match-bio">Full-stack developer interested in mobile development</div>
+            
+            <div style="margin: var(--spacing-md) 0;">
+              <p class="text-secondary" style="font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Can teach:</p>
+              <div class="match-skills">
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">MongoDB</span>
+              </div>
+            </div>
+            
+            <div style="margin-bottom: var(--spacing-md);">
+              <p class="text-secondary" style="font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Wants to learn:</p>
+              <div class="match-skills">
+                <span class="skill-tag">React Native</span>
+                <span class="skill-tag">Flutter</span>
+              </div>
+            </div>
+            
+            <div class="flex-center gap-sm">
+              <div class="rating" style="font-size: 0.875rem; justify-content: center;">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star">★</span>
+              </div>
+              <span class="text-muted" style="font-size: 0.875rem;">(15 reviews)</span>
+            </div>
+            
+            <div style="display: flex; gap: var(--spacing-sm); margin-top: var(--spacing-md);">
+              <button class="btn btn-primary" style="flex: 1;" onclick="sendRequest('Rachel Kim')">Connect</button>
+              <button class="btn btn-outline" style="flex: 1;" onclick="viewProfile('Rachel Kim')">View Profile</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Match Card 6 -->
+        <div class="match-card">
+          <div class="match-header">
+            <div class="match-avatar">JD</div>
+            <div class="match-score">75% Match</div>
+          </div>
+          <div class="match-body">
+            <div class="match-name">James Davis</div>
+            <div class="match-bio">Backend developer learning frontend technologies</div>
+            
+            <div style="margin: var(--spacing-md) 0;">
+              <p class="text-secondary" style="font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Can teach:</p>
+              <div class="match-skills">
+                <span class="skill-tag">Java</span>
+                <span class="skill-tag">Spring</span>
+                <span class="skill-tag">API Design</span>
+              </div>
+            </div>
+            
+            <div style="margin-bottom: var(--spacing-md);">
+              <p class="text-secondary" style="font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Wants to learn:</p>
+              <div class="match-skills">
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Vue</span>
+              </div>
+            </div>
+            
+            <div class="flex-center gap-sm">
+              <div class="rating" style="font-size: 0.875rem; justify-content: center;">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star">★</span>
+              </div>
+              <span class="text-muted" style="font-size: 0.875rem;">(10 reviews)</span>
+            </div>
+            
+            <div style="display: flex; gap: var(--spacing-sm); margin-top: var(--spacing-md);">
+              <button class="btn btn-primary" style="flex: 1;" onclick="sendRequest('James Davis')">Connect</button>
+              <button class="btn btn-outline" style="flex: 1;" onclick="viewProfile('James Davis')">View Profile</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 SkillExchange. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script>
+    function sendRequest(name) {
+      SkillExchange.showAlert(`Connection request sent to ${name}!`, 'success');
+    }
+
+    function viewProfile(name) {
+      SkillExchange.showAlert(`Viewing ${name}'s profile...`, 'info');
+    }
+
+    function applyFilters() {
+      const search = document.getElementById('searchInput').value;
+      const sort = document.getElementById('matchSort').value;
+      SkillExchange.showAlert(`Filtering by: ${search || 'All skills'}, sorting by: ${sort}`, 'info');
+    }
+  </script>
+</body>
+</html>

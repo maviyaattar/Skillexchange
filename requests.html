@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manage your skill exchange requests">
+  <title>Requests - SkillExchange</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+          ✨ SkillExchange
+        </a>
+        
+        <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+        
+        <ul class="navbar-nav">
+          <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+          <li><a href="matches.html" class="nav-link">Matches</a></li>
+          <li><a href="inbox.html" class="nav-link">Inbox</a></li>
+          <li><a href="requests.html" class="nav-link active">Requests</a></li>
+          <li><a href="profile.html" class="nav-link">Profile</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main style="padding: var(--spacing-xl) 0;">
+    <div class="container">
+      <!-- Page Header -->
+      <div style="margin-bottom: var(--spacing-xl);">
+        <h1 class="fade-in">Exchange Requests 🤝</h1>
+        <p class="text-secondary">Manage your incoming and outgoing skill exchange requests</p>
+      </div>
+
+      <!-- Tabs -->
+      <div style="display: flex; gap: var(--spacing-md); margin-bottom: var(--spacing-lg); border-bottom: 2px solid var(--dark-surface);">
+        <button class="tab-button active" onclick="showTab('incoming')" id="incomingTab" style="padding: var(--spacing-md) var(--spacing-lg); background: none; border: none; border-bottom: 3px solid var(--primary); color: var(--primary); font-weight: 600; cursor: pointer; font-family: var(--font-primary); font-size: 1rem;">
+          Incoming (3)
+        </button>
+        <button class="tab-button" onclick="showTab('outgoing')" id="outgoingTab" style="padding: var(--spacing-md) var(--spacing-lg); background: none; border: none; border-bottom: 3px solid transparent; color: var(--text-secondary); font-weight: 600; cursor: pointer; font-family: var(--font-primary); font-size: 1rem;">
+          Outgoing (2)
+        </button>
+        <button class="tab-button" onclick="showTab('history')" id="historyTab" style="padding: var(--spacing-md) var(--spacing-lg); background: none; border: none; border-bottom: 3px solid transparent; color: var(--text-secondary); font-weight: 600; cursor: pointer; font-family: var(--font-primary); font-size: 1rem;">
+          History
+        </button>
+      </div>
+
+      <!-- Incoming Requests Tab -->
+      <div id="incomingRequests" class="tab-content">
+        <div style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+          <!-- Request 1 -->
+          <div class="request-card">
+            <div class="request-header">
+              <div class="request-user">
+                <div class="user-avatar">LW</div>
+                <div>
+                  <div class="user-name">Lisa Wong</div>
+                  <div class="user-role">Wants to exchange: Your React ↔ Her Python</div>
+                </div>
+              </div>
+              <span class="request-status pending">Pending</span>
+            </div>
+            <p class="text-secondary" style="margin: var(--spacing-sm) 0;">
+              "Hi! I'm a Python developer looking to learn React. I saw your profile and think we'd be a great match. I have 5 years of experience with Python and Django."
+            </p>
+            <div style="display: flex; gap: var(--spacing-xs); margin-top: var(--spacing-xs);">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Django</span>
+              <span class="skill-tag">REST APIs</span>
+            </div>
+            <div class="request-actions">
+              <button class="btn btn-primary" onclick="acceptRequest('Lisa Wong')">Accept</button>
+              <button class="btn btn-outline" onclick="declineRequest('Lisa Wong')">Decline</button>
+              <button class="btn btn-ghost" onclick="viewProfile('Lisa Wong')">View Profile</button>
+            </div>
+          </div>
+
+          <!-- Request 2 -->
+          <div class="request-card">
+            <div class="request-header">
+              <div class="request-user">
+                <div class="user-avatar">KP</div>
+                <div>
+                  <div class="user-name">Kevin Park</div>
+                  <div class="user-role">Wants to exchange: Your JavaScript ↔ His Go</div>
+                </div>
+              </div>
+              <span class="request-status pending">Pending</span>
+            </div>
+            <p class="text-secondary" style="margin: var(--spacing-sm) 0;">
+              "I'm interested in learning modern JavaScript and frontend frameworks. I can teach you Go and backend development in return."
+            </p>
+            <div style="display: flex; gap: var(--spacing-xs); margin-top: var(--spacing-xs);">
+              <span class="skill-tag">Go</span>
+              <span class="skill-tag">Microservices</span>
+              <span class="skill-tag">Kubernetes</span>
+            </div>
+            <div class="request-actions">
+              <button class="btn btn-primary" onclick="acceptRequest('Kevin Park')">Accept</button>
+              <button class="btn btn-outline" onclick="declineRequest('Kevin Park')">Decline</button>
+              <button class="btn btn-ghost" onclick="viewProfile('Kevin Park')">View Profile</button>
+            </div>
+          </div>
+
+          <!-- Request 3 -->
+          <div class="request-card">
+            <div class="request-header">
+              <div class="request-user">
+                <div class="user-avatar">NS</div>
+                <div>
+                  <div class="user-name">Nina Shah</div>
+                  <div class="user-role">Wants to exchange: Your UI/UX ↔ Her Content Writing</div>
+                </div>
+              </div>
+              <span class="request-status pending">Pending</span>
+            </div>
+            <p class="text-secondary" style="margin: var(--spacing-sm) 0;">
+              "Looking to improve my design skills! I'm a professional content writer and can help you with copywriting and content strategy."
+            </p>
+            <div style="display: flex; gap: var(--spacing-xs); margin-top: var(--spacing-xs);">
+              <span class="skill-tag">Content Writing</span>
+              <span class="skill-tag">Copywriting</span>
+              <span class="skill-tag">SEO</span>
+            </div>
+            <div class="request-actions">
+              <button class="btn btn-primary" onclick="acceptRequest('Nina Shah')">Accept</button>
+              <button class="btn btn-outline" onclick="declineRequest('Nina Shah')">Decline</button>
+              <button class="btn btn-ghost" onclick="viewProfile('Nina Shah')">View Profile</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Outgoing Requests Tab -->
+      <div id="outgoingRequests" class="tab-content" style="display: none;">
+        <div style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+          <!-- Request 1 -->
+          <div class="request-card">
+            <div class="request-header">
+              <div class="request-user">
+                <div class="user-avatar">DM</div>
+                <div>
+                  <div class="user-name">David Miller</div>
+                  <div class="user-role">Your request: Your Node.js ↔ His AWS</div>
+                </div>
+              </div>
+              <span class="request-status pending">Pending</span>
+            </div>
+            <p class="text-secondary" style="margin: var(--spacing-sm) 0;">
+              You sent a request to learn AWS and cloud architecture. Waiting for response...
+            </p>
+            <div style="display: flex; gap: var(--spacing-xs); margin-top: var(--spacing-xs);">
+              <span class="skill-tag">AWS</span>
+              <span class="skill-tag">Cloud</span>
+              <span class="skill-tag">DevOps</span>
+            </div>
+            <div class="request-actions">
+              <button class="btn btn-outline" onclick="cancelRequest('David Miller')">Cancel Request</button>
+              <button class="btn btn-ghost" onclick="viewProfile('David Miller')">View Profile</button>
+            </div>
+          </div>
+
+          <!-- Request 2 -->
+          <div class="request-card">
+            <div class="request-header">
+              <div class="request-user">
+                <div class="user-avatar">AF</div>
+                <div>
+                  <div class="user-name">Amy Foster</div>
+                  <div class="user-role">Your request: Your React ↔ Her Mobile Dev</div>
+                </div>
+              </div>
+              <span class="request-status pending">Pending</span>
+            </div>
+            <p class="text-secondary" style="margin: var(--spacing-sm) 0;">
+              You sent a request to learn mobile development. Waiting for response...
+            </p>
+            <div style="display: flex; gap: var(--spacing-xs); margin-top: var(--spacing-xs);">
+              <span class="skill-tag">React Native</span>
+              <span class="skill-tag">Flutter</span>
+              <span class="skill-tag">iOS</span>
+            </div>
+            <div class="request-actions">
+              <button class="btn btn-outline" onclick="cancelRequest('Amy Foster')">Cancel Request</button>
+              <button class="btn btn-ghost" onclick="viewProfile('Amy Foster')">View Profile</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- History Tab -->
+      <div id="historyRequests" class="tab-content" style="display: none;">
+        <div style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+          <!-- Accepted Request -->
+          <div class="request-card" style="border-left-color: var(--success);">
+            <div class="request-header">
+              <div class="request-user">
+                <div class="user-avatar">SM</div>
+                <div>
+                  <div class="user-name">Sarah Martinez</div>
+                  <div class="user-role">Exchange: Your React ↔ Her Python</div>
+                </div>
+              </div>
+              <span class="request-status accepted">Accepted</span>
+            </div>
+            <p class="text-secondary" style="margin: var(--spacing-sm) 0;">
+              Successfully connected! Exchange is now active.
+            </p>
+            <div style="color: var(--text-muted); font-size: 0.875rem; margin-top: var(--spacing-sm);">
+              Accepted on Jan 1, 2026
+            </div>
+          </div>
+
+          <!-- Declined Request -->
+          <div class="request-card" style="border-left-color: var(--error);">
+            <div class="request-header">
+              <div class="request-user">
+                <div class="user-avatar">RB</div>
+                <div>
+                  <div class="user-name">Robert Brown</div>
+                  <div class="user-role">Wanted: Your JavaScript ↔ His Ruby</div>
+                </div>
+              </div>
+              <span class="request-status declined">Declined</span>
+            </div>
+            <p class="text-secondary" style="margin: var(--spacing-sm) 0;">
+              You declined this request.
+            </p>
+            <div style="color: var(--text-muted); font-size: 0.875rem; margin-top: var(--spacing-sm);">
+              Declined on Dec 28, 2025
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 SkillExchange. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script>
+    function showTab(tabName) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.style.display = 'none';
+      });
+      
+      // Remove active class from all tab buttons
+      document.querySelectorAll('.tab-button').forEach(btn => {
+        btn.style.borderBottomColor = 'transparent';
+        btn.style.color = 'var(--text-secondary)';
+      });
+      
+      // Show selected tab
+      document.getElementById(`${tabName}Requests`).style.display = 'block';
+      
+      // Add active class to selected tab button
+      const activeBtn = document.getElementById(`${tabName}Tab`);
+      activeBtn.style.borderBottomColor = 'var(--primary)';
+      activeBtn.style.color = 'var(--primary)';
+    }
+
+    function acceptRequest(name) {
+      SkillExchange.showAlert(`Request from ${name} accepted! You can now start your exchange.`, 'success');
+    }
+
+    function declineRequest(name) {
+      SkillExchange.showAlert(`Request from ${name} declined.`, 'info');
+    }
+
+    function cancelRequest(name) {
+      SkillExchange.showAlert(`Request to ${name} cancelled.`, 'info');
+    }
+
+    function viewProfile(name) {
+      SkillExchange.showAlert(`Viewing ${name}'s profile...`, 'info');
+    }
+  </script>
+</body>
+</html>

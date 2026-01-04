@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your SkillExchange Dashboard">
+  <title>Dashboard - SkillExchange</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+          ✨ SkillExchange
+        </a>
+        
+        <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+        
+        <ul class="navbar-nav">
+          <li><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
+          <li><a href="matches.html" class="nav-link">Matches</a></li>
+          <li><a href="inbox.html" class="nav-link">Inbox</a></li>
+          <li><a href="requests.html" class="nav-link">Requests</a></li>
+          <li><a href="profile.html" class="nav-link">Profile</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main style="padding: var(--spacing-xl) 0;">
+    <div class="container">
+      <!-- Welcome Section -->
+      <div class="flex-between" style="margin-bottom: var(--spacing-xl); flex-wrap: wrap; gap: var(--spacing-md);">
+        <div>
+          <h1 class="fade-in">Welcome back, <span id="userName">User</span>! 👋</h1>
+          <p class="text-secondary">Here's what's happening with your skill exchanges</p>
+        </div>
+        <a href="matches.html" class="btn btn-primary">Find New Matches</a>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="grid grid-3 mb-lg">
+        <div class="stat-card">
+          <div class="stat-value" id="totalExchanges">12</div>
+          <div class="stat-label">Total Exchanges</div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-value" id="totalConnections">45</div>
+          <div class="stat-label">Connections</div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-value" id="userRating">4.8</div>
+          <div class="stat-label">Your Rating</div>
+        </div>
+      </div>
+
+      <!-- Main Dashboard Grid -->
+      <div class="grid" style="grid-template-columns: 2fr 1fr; gap: var(--spacing-lg);">
+        <!-- Recent Activity -->
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Recent Activity</h3>
+            </div>
+            <div class="card-body">
+              <div style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+                <div class="user-card">
+                  <div class="user-avatar">SM</div>
+                  <div class="user-info">
+                    <div class="user-name">Sarah Martinez</div>
+                    <div class="user-role">Completed exchange - React Development</div>
+                    <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.25rem;">2 hours ago</div>
+                  </div>
+                  <span class="badge badge-success">Completed</span>
+                </div>
+                
+                <div class="user-card">
+                  <div class="user-avatar">MJ</div>
+                  <div class="user-info">
+                    <div class="user-name">Michael Johnson</div>
+                    <div class="user-role">New match request - UI/UX Design</div>
+                    <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.25rem;">5 hours ago</div>
+                  </div>
+                  <span class="badge badge-primary">New</span>
+                </div>
+                
+                <div class="user-card">
+                  <div class="user-avatar">EL</div>
+                  <div class="user-info">
+                    <div class="user-name">Emma Lee</div>
+                    <div class="user-role">Sent you a message</div>
+                    <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.25rem;">1 day ago</div>
+                  </div>
+                  <span class="badge badge-warning">Unread</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Upcoming Sessions -->
+          <div class="card mt-lg">
+            <div class="card-header">
+              <h3>Upcoming Sessions</h3>
+            </div>
+            <div class="card-body">
+              <div style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+                <div style="padding: var(--spacing-md); background: var(--dark-bg-tertiary); border-radius: var(--radius-md); border-left: 3px solid var(--primary);">
+                  <div class="flex-between" style="margin-bottom: var(--spacing-xs);">
+                    <strong>Python Basics with Tom Chen</strong>
+                    <span class="badge badge-primary">Tomorrow</span>
+                  </div>
+                  <p class="text-secondary" style="font-size: 0.875rem; margin: 0;">Jan 5, 2026 at 3:00 PM</p>
+                </div>
+                
+                <div style="padding: var(--spacing-md); background: var(--dark-bg-tertiary); border-radius: var(--radius-md); border-left: 3px solid var(--accent);">
+                  <div class="flex-between" style="margin-bottom: var(--spacing-xs);">
+                    <strong>JavaScript Advanced with Rachel Kim</strong>
+                    <span class="badge badge-success">Jan 8</span>
+                  </div>
+                  <p class="text-secondary" style="font-size: 0.875rem; margin: 0;">Jan 8, 2026 at 10:00 AM</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div>
+          <!-- Quick Actions -->
+          <div class="card mb-lg">
+            <div class="card-header">
+              <h4>Quick Actions</h4>
+            </div>
+            <div class="card-body">
+              <div style="display: flex; flex-direction: column; gap: var(--spacing-sm);">
+                <a href="matches.html" class="btn btn-outline" style="width: 100%; text-align: center;">
+                  🎯 Find Matches
+                </a>
+                <a href="inbox.html" class="btn btn-outline" style="width: 100%; text-align: center;">
+                  💬 Messages
+                </a>
+                <a href="profile.html" class="btn btn-outline" style="width: 100%; text-align: center;">
+                  👤 Edit Profile
+                </a>
+                <a href="feedback.html" class="btn btn-outline" style="width: 100%; text-align: center;">
+                  ⭐ Leave Feedback
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skills Overview -->
+          <div class="card">
+            <div class="card-header">
+              <h4>Your Skills</h4>
+            </div>
+            <div class="card-body">
+              <div style="margin-bottom: var(--spacing-md);">
+                <p class="text-secondary" style="font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Teaching:</p>
+                <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                  <span class="skill-tag selected">JavaScript</span>
+                  <span class="skill-tag selected">React</span>
+                  <span class="skill-tag selected">Node.js</span>
+                </div>
+              </div>
+              
+              <div>
+                <p class="text-secondary" style="font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Learning:</p>
+                <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                  <span class="skill-tag">Python</span>
+                  <span class="skill-tag">ML</span>
+                  <span class="skill-tag">DevOps</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 SkillExchange. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script>
+    // Load user data
+    const user = SkillExchange.getCurrentUser();
+    if (user) {
+      document.getElementById('userName').textContent = user.name.split(' ')[0];
+      document.getElementById('totalExchanges').textContent = user.stats.exchanges;
+      document.getElementById('totalConnections').textContent = user.stats.connections;
+      document.getElementById('userRating').textContent = user.stats.rating;
+    }
+  </script>
+</body>
+</html>
