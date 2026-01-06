@@ -1,0 +1,76 @@
+/* Style.css - Dark Theme for SkillExchange */
+
+/* General Settings */
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+header {
+    background-color: #1e1e1e;
+    padding: 10px 20px;
+    text-align: center;
+    border-bottom: 1px solid #333333;
+}
+
+header h1 {
+    color: #00acc1;
+}
+
+/* Navigation */
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #1e1e1e;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+nav ul li a:hover {
+    background-color: #333333;
+    border-radius: 5px;
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+}
+
+/* Buttons */
+button {
+    background-color: #00acc1;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+button:hover {
+    background-color: #007c91;
+}
+
+/* Footer */
+footer {
+    background-color: #1e1e1e;
+    text-align: center;
+    padding: 10px 20px;
+    border-top: 1px solid #333333;
+    margin-top: 20px;
+    color: #777777;
+}
